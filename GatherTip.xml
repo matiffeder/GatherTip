@@ -1,0 +1,37 @@
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="../../worldxml/ui.xsd"> 
+	<Script file="GatherTip.lua"/>
+	<Button name="GatherTip" parent="UIParent" frameStrata="LOW">
+		<NormalTexture file="Interface/AddOns/GatherTip/GT"/>
+		<PushedTexture file="Interface/AddOns/GatherTip/GT_H"/>
+		<HighlightTexture file="Interface/AddOns/GatherTip/GT_H" alphaMode="ADD"/>
+		<Size><AbsDimension x="26" y="26"/></Size>
+		<Anchors>
+			<Anchor point="TOPRIGHT"/>
+		</Anchors>
+		<Scripts>
+			<OnLoad>
+				this:RegisterEvent("VARIABLES_LOADED");
+				GatherTipSet = {};
+			</OnLoad>
+			<OnEvent>
+				GatherTip_OnEvent(this,event);
+			</OnEvent>
+			<OnEnter>
+				GatherTip_OnEnter(this);
+			</OnEnter>
+			<OnLeave>
+				GameTooltip:Hide();
+			</OnLeave>
+			<OnMouseDown>
+				if key=="RBUTTON" then
+					if IsShiftKeyDown() then
+						this:StartMoving();
+					end
+				end
+			</OnMouseDown>
+			<OnMouseUp>
+				GatherTip_MoveEnd(this);
+			</OnMouseUp>
+		</Scripts>
+	</Button>
+</Ui>
